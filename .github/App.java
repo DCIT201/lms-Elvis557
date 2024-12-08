@@ -4,9 +4,9 @@ public class App{
         Library library = new Library();
 
         //Add books to the library
-        library.addBook(new Book("The Alchemist", "Romeo and Juliet"));
-        library.addBook(new Book("Spiderman 2", "Titanic" ));
-        library.addBook(new Book("Home alone", "Deadpool"));
+        library.addBook(new Book("The Alchemist", "Elvis Jr."));
+        library.addBook(new Book("Spiderman 2", "Ernest Hemingway" ));
+        library.addBook(new Book("Home alone", "El chapo"));
 
         //Display all books
         System.out.println("Books in the library: ");
