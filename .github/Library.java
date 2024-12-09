@@ -1,45 +1,29 @@
+package org.example;
+
 import java.util.ArrayList;
-import java.util.List;
 
-public class Library{
-    private List<Book> books; //list to store books in the library
+public class Library {
+    private final ArrayList<Book> books;
 
-    //Constructor to initialize the library
-    public Library(){
+    public Library() {
         books = new ArrayList<>();
     }
 
-    //Add a book to the library
-    public void addBook(Book book){
+    public void addBook(Book book) {
         books.add(book);
     }
 
-    //Remove a book from the library by title
-    public boolean removeBook(String title){
-        for(Book book : books){
-            if(book.getTitle().equalsIgnoreCase(title)){
-                books.remove(book);
-                return true;
-            }
-        }
-        return false; //Book not found
+    public boolean removeBook(String title) {
+        return books.removeIf(book -> book.title().equals(title));
     }
 
-    //search for a book by title
-    public Book searchBook(String title){
-        for(Book book : books){
-            if(book.getTitle().equalsIgnoreCase(title)){
-                return book;
+    public void listBooks() {
+        if (books.isEmpty()) {
+            System.out.println("No books available.");
+        } else {
+            for (Book book : books) {
+                System.out.println(book.title());
             }
-        }
-
-        return null; //Book not found
-    }
-
-    //display all books
-    public void displayBooks(){
-        for(Book book : books){
-            System.out.println(book);
         }
     }
 }
