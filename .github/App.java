@@ -1,36 +1,32 @@
-public class App{
-    public static void main(String[] args){
-        //Create Library object
+package org.example;
+
+public class App {
+    public static void main(String[] args) {
         Library library = new Library();
 
-        //Add books to the library
-        library.addBook(new Book("The Alchemist", "Elvis Jr."));
-        library.addBook(new Book("Spiderman 2", "Ernest Hemingway" ));
-        library.addBook(new Book("Home alone", "El chapo"));
+        // Add books to the library
+        library.addBook(new Book("My heart", "Elvis Boateng", 2020));
+        library.addBook(new Book("Lord of the rings", "Janeth Ansong", 1919));
 
-        //Display all books
-        System.out.println("Books in the library: ");
-        library.displayBooks();
+        // List all books
+        System.out.println("Books in the library:");
+        library.listBooks();
 
-        //Create a patron
-        Patron patron = new Patron("Elvis", 121);
+        // Create a patron
+        Patron patron = new Patron("Aces", 1);
 
-        //Patron borrows a book
-        Book bookToBorrow = library.searchBook("1984");
-        if(bookToBorrow != null){
-            patron.borrowBook(bookToBorrow);
-        }
+        // Borrow a book
+        patron.borrowBook(new Book("My heart", "Elvis Boateng", 2020), library);
 
-        //Display borrowed books
-        patron.displayBorrowedBooks();
+        // List borrowed books
+        System.out.println("\nBorrowed books:");
+        patron.listBorrowedBooks();
 
-        //return the books
-        patron.returnBook(bookToBorrow);
+        // Return a book
+        patron.returnBook(new Book("My heart", "Elvis Boateng", 2020), library);
 
-        // Display books in the library again
-        System.out.println("\nBooks in the library after return:");
-        library.displayBooks();
-
-
+        // Final library state
+        System.out.println("\nBooks in the library after operations:");
+        library.listBooks();
     }
 }
