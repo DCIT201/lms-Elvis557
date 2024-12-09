@@ -1,47 +1,41 @@
+package org.example;
+
 import java.util.ArrayList;
-import java.util.List;
 
 public class Patron {
-    private String name;
-    private int id;
-    private List<Book> borrowedBooks;
+    private final String name;
+    private final ArrayList<Book> borrowedBooks;
 
-    //constructor
-    public Patron(String name, int id){
+    public Patron(String name, int id) {
         this.name = name;
-        this.id = id;
-        this.borrowedBooks = new ArrayList<>();
+        borrowedBooks = new ArrayList<>();
     }
 
-    //Borrow a book
-    public void borrowedBook(Book book){
-        if(book.isAvailable){
+    public void borrowBook(Book book, Library library) {
+        if (library.removeBook(book.title())) {
             borrowedBooks.add(book);
-            book.setAvailable(false); // Mark the book as unavailable
-            System.out.println(name + " borrowed: " + book.getTitle());
-        }
-        else{
-            System.out.println("The book was not borrowed by " + name);
+            System.out.println(name + " borrowed " + book.title());
+        } else {
+            System.out.println("Book not available.");
         }
     }
 
-    //return a book
-    public void returnBook(Book book){
-        if (borrowedBooks.contains(book)) {
-            borrowedBooks.remove(book);
-            book.setAvailable(true); // Mark the book as available
-            System.out.println(name + " returned: " + book.getTitle());
-        }
-        else {
-            System.out.println("The book was not borrowed by " + name);
+    public void returnBook(Book book, Library library) {
+        if (borrowedBooks.remove(book)) {
+            library.addBook(book);
+            System.out.println(name + " returned " + book.title());
+        } else {
+            System.out.println("You don't have this book.");
         }
     }
 
-    //display borrowed books
-    public void displayBorrowedBooks(){
-        System.out.println("Books borrowed by " + name + ":");
-        for(Book book : borrowedBooks){
-            System.out.println(book.getTitle());
+    public void listBorrowedBooks() {
+        if (borrowedBooks.isEmpty()) {
+            System.out.println("No books borrowed.");
+        } else {
+            for (Book book : borrowedBooks) {
+                System.out.println(book.title());
+            }
         }
     }
 }
